@@ -1,0 +1,25 @@
+{
+  "name": "webStudy",
+  "version": "1.0.0",
+  "description": "웹페이지를 공부하며 만들어 보는 프로젝트 입니다.",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel ./public/src -d ./public/lib -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jinsujin/webStudy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jinsujin/webStudy/issues"
+  },
+  "homepage": "https://github.com/Jinsujin/webStudy#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-minify": "^0.5.1"
+  }
+}
