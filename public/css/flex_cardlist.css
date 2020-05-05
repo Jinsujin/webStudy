@@ -1,0 +1,26 @@
+ul.card-list {
+    /*display: flex;*/
+}
+
+li.card-item {
+    margin-bottom: 2rem;
+}
+
+.card-image {
+    height: 0;
+    padding-bottom: 60%;
+    background-color: lightgray;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card-image img {
+    display: none;
+}
+
+/*
+padding : 100% 는 컨텐트가 최대로 늘어날수 있는 폭의 100%
+이를 기준으로 바닥에서 60%을 잡음
+가로세로 비율을 유지하기 위해 패딩 바텀으로 크기를 잡음
+*/
