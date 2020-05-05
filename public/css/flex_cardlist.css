@@ -1,9 +1,12 @@
 ul.card-list {
     /*display: flex;*/
+    background-color: gray;
 }
 
 li.card-item {
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .card-image {
@@ -19,8 +22,34 @@ li.card-item {
     display: none;
 }
 
+.card-desc {
+    flex: 1 1 auto;
+    padding: 1em;
+    background: white;
+}
+
 /*
 padding : 100% 는 컨텐트가 최대로 늘어날수 있는 폭의 100%
 이를 기준으로 바닥에서 60%을 잡음
 가로세로 비율을 유지하기 위해 패딩 바텀으로 크기를 잡음
 */
+
+/* 600 픽셀 이상일때*/
+@media (min-width: 600px){
+    .card-list {
+        display: flex;
+        flex-wrap: wrap;
+        /*justify-content: space-between;*/
+        margin: 0 -1rem;
+    }
+
+    .card-item {
+        width: 50%;
+        padding: 0 1rem;
+    }
+}
+@media (min-width: 1200px){
+    .card-item {
+        width: 33.33333%;
+    }
+}

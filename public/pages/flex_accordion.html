@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <style>
+        .card-list {
+            height: 100vh;
+            width: 100vw;
+            background-color: lightblue;
+            display: flex;
+        }
+        .card-item {
+            flex: 1;
+            border-right: 1px solid white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            position:relative;
+            box-sizing: border-box;
+        }
+
+        .card-item:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -3px;
+            width: 6px;
+            height: 6px;
+            background-color: white;
+            transform: rotate(45deg);
+        }
+
+        .card-image {
+            height: 0;
+            width: 100%;
+            padding-bottom: 80%;
+            background-image: url("../images/room.png");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-bottom: 1rem;
+        }
+
+        .card-image img {
+            display: none;
+        }
+
+        .card-list > li.card-item:last-child {
+            border-right: 0;
+        }
+
+        .card-list > li.card-item:last-child:after {
+            display: none;
+        }
+
+
+        /* 1100 이하 */
+        @media (max-width: 1100px){
+            .card-list {
+                flex-wrap: wrap;
+            }
+            .card-list .card-item {
+                width: 25%;
+                flex: 1 0 auto;
+            }
+            .card-list > li.card-item:nth-child(4n) {
+                border-right: 0;
+            }
+
+            .card-list > li.card-item:nth-child(4n):after {
+                display: none;
+            }
+
+        }
+
+        /* 600 이하 */
+        @media (max-width: 600px){
+            .card-list {
+                height: 100%;
+                flex-direction: column;
+            }
+
+            .card-list .card-item {
+                width: 100%;
+                flex: 1 1 auto;
+                border-right: 0;
+                border-bottom: 1px solid white;
+            }
+
+            .card-item:after {
+                content: '';
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                width: 6px;
+                height: 6px;
+                background-color: white;
+                transform: translateY(-50%) rotate(45deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<ul class="card-list">
+    <li class="card-item">
+        <figure class="card-image">
+            <img src="../images/room.png" alt="">
+        </figure>
+        <div class="desc">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, veniam.
+        </div>
+    </li>
+    <li class="card-item">
+        <figure class="card-image">
+            <img src="" alt="">
+        </figure>
+        <div class="desc">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, veniam.
+        </div>
+    </li>
+    <li class="card-item">
+        <figure class="card-image">
+            <img src="" alt="">
+        </figure>
+        <div class="desc">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, veniam.
+        </div>
+    </li>
+    <li class="card-item">
+        <figure class="card-image">
+            <img src="" alt="">
+        </figure>
+        <div class="desc">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, veniam.
+        </div>
+    </li>
+    <li class="card-item">
+        <figure class="card-image">
+            <img src="" alt="">
+        </figure>
+        <div class="desc">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, veniam.
+        </div>
+    </li>
+    <li class="card-item">
+        <figure class="card-image">
+            <img src="" alt="">
+        </figure>
+        <div class="desc">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, veniam.
+        </div>
+    </li>
+    <li class="card-item">
+        <figure class="card-image">
+            <img src="" alt="">
+        </figure>
+        <div class="desc">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, veniam.
+        </div>
+    </li>
+    <li class="card-item">
+        <figure class="card-image">
+            <img src="" alt="">
+        </figure>
+        <div class="desc">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, veniam.
+        </div>
+    </li>
+</ul>
+
+</body>
+</html>
