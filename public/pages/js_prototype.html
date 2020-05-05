@@ -28,13 +28,17 @@
             }
         }
 
-        var quang = new Student("광수", 30);
-        var kim = new Student("김고은", 67);
-
     </script>
 </head>
 <body>
+    <h2>생성자 함수(constructor) 를 이용해 객체 생성하기</h2>
+    <script>
+        var quang = new Student("광수", 30);
+        document.write(quang.name + ": " + quang.getGrade() + "<br/>");
 
+        var kim = new Student("김고은", 90);
+        document.write(kim.name + ": " + kim.getGrade() + "<br/>");
 
+    </script>
 </body>
 </html>
