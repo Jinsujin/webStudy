@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>레이어팝업 - 스크롤 컨텐츠</title>
+
+    <style>
+
+
+    * {
+        margin: 0; padding: 0;
+    }
+
+    .popup {
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.4);
+        position: fixed;
+    }
+
+    .contents_wrap {
+        background: #fff;
+        width: 500px;
+        height: 500px;
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        overflow-x: auto;
+        overflow-y: scroll;
+    }
+
+    .contents_wrap > section {
+        width: 100%;
+        height: 2000px;
+        background: linear-gradient(to bottom, white, dodgerblue, darkblue);
+    }
+
+    </style>
+</head>
+<body>
+
+
+<div class="popup">
+    <div class="contents_wrap">
+        <section class="content01"></section>
+    </div>
+</div>
+
+</body>
+</html>
