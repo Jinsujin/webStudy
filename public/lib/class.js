@@ -1,0 +1,4 @@
+'use strict';var _createClass=function(){function a(a,b){for(var c,d=0;d<b.length;d++)c=b[d],c.enumerable=c.enumerable||!1,c.configurable=!0,'value'in c&&(c.writable=!0),Object.defineProperty(a,c.key,c)}return function(b,c,d){return c&&a(b.prototype,c),d&&a(b,d),b}}();function _classCallCheck(a,b){if(!(a instanceof b))throw new TypeError('Cannot call a class as a function')}var Person=function(){// 생성자
+function a(b,c){_classCallCheck(this,a),this.name=b,this.age=c}return _createClass(a,[{key:'speak',value:function a(){console.log('My name is '+this.name)}//    getter, setter
+//    사용자가 값을 잘못 입력했을때, 이를 올바른 값으로 컨트롤 하기 위해 사용
+},{key:'age',get:function a(){return this._age},set:function b(a){this._age=0>a?0:a}}]),a}(),sujin=new Person('sujin',-1);console.log(sujin.name),console.log(sujin.age),sujin.speak();
