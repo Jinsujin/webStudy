@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+
+  <link rel="stylesheet" href="../css/reset.css" />
+  <style>
+    .grid-container {
+      padding: 10px;
+      background: lightgray;
+      display: grid;
+      /* grid-template-columns: 100px 300px 100px; */
+      /* grid-template-columns: 1fr 1fr 1fr; 1:1:1 비율 - 컬럼3개 */
+      /* grid-template-columns: 1fr 500px 1fr; */
+      grid-template-columns: repeat(3, 1fr);
+
+      /* row: 행 */
+      /* grid-template-rows: 200px 200px auto; */
+      /* grid-template-rows: repeat(3, 1fr); */
+      /* height: 80vh; */
+      grid-template-rows: repeat(3,
+        minmax(100px, auto));
+      /* 최소 높이 100, 최대 auto */
+    }
+
+    .grid-item {
+      padding: 10px;
+      border: 1px solid rgb(50, 50, 40);
+      color: white;
+      background: #ff6666;
+    }
+
+    .grid-container-02 {
+      display: grid;
+      /* 미디어 쿼리처럼 반응형 만들기 */
+
+      grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+
+      /* auto-fit 아이템 갯수가 모자라는 경우에, 늘려서 채운다 */
+      grid-template-columns: repeat(auto-fit,
+        minmax(200px, auto));
+      /* 최소 200, 최대 auto  */
+    }
+
+    .grid-container-03 {
+      background: orange;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      grid-gap: 20px;
+      /* 예전버전 */
+
+      /* template-row 는, 아이템 갯수가 늘어나면 그만큼 갯수를 맞춰줘야 하는 단점이 있음 */
+      /* grid-template-rows: repeat(3, minmax(200px, auto)); */
+
+      /* 데이터가 몇개일지 모를때, 자동으로 맞춰주는 속성 */
+      grid-auto-rows: 300px;
+
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>grid-template-columns : 열</li>
+    <li>grid-template-rows : 행</li>
+    <li>grid 는 기본적으로, 컨테이너를 꽉 채워서 격자 형태를 만든다.</li>
+  </ul>
+
+  <div class="grid-container">
+    <div class="grid-item">1</div>
+    <div class="grid-item">2</div>
+    <div class="grid-item">3</div>
+    <div class="grid-item">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed eos eius
+      mollitia id accusamus ipsam itaque rerum nostrum quaerat alias.
+    </div>
+    <div class="grid-item">5</div>
+    <div class="grid-item">6</div>
+    <div class="grid-item">7</div>
+    <div class="grid-item">8</div>
+    <div class="grid-item">9</div>
+  </div>
+
+  <hr />
+
+  <div class="grid-container-02">
+    <div class="grid-item">1</div>
+    <div class="grid-item">2</div>
+    <div class="grid-item">3</div>
+    <!-- <div class="grid-item">
+                Lorem ipsum dolor si
+            </div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">6</div>
+            <div class="grid-item">7</div>
+            <div class="grid-item">8</div>
+            <div class="grid-item">9</div> -->
+  </div>
+
+  <hr>
+
+  <div class="grid-container-03">
+    <div class="grid-item">1</div>
+    <div class="grid-item">2</div>
+    <div class="grid-item">3</div>
+    <div class="grid-item">
+      Lorem ipsum dolor si
+    </div>
+    <div class="grid-item">5</div>
+    <div class="grid-item">6</div>
+    <div class="grid-item">7</div>
+    <div class="grid-item">8</div>
+    <div class="grid-item">9</div>
+    <div class="grid-item">7</div>
+    <div class="grid-item">8</div>
+    <div class="grid-item">9</div>
+  </div>
+</body>
+
+</html>
