@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>사용자 객체</title>
+
+    <script>
+
+/****************** 객체 생성 방법1 - object로 빈객체를 만들어 값,메서드 추가*******************/
+        /*
+        // 잔금조회
+        function inquery(){return this.balance;}
+
+        // 저금
+        function deposit(money){ this.balance += money; }
+
+        // 예금인출
+        function withdraw(money){
+            if (money > this.balance) {
+                print("통장잔금보다 인출액이 큽니다. 전체를 반환합니다.");
+                this.balance = 0;
+                return money
+            }
+            this.balance -= money;
+            return money
+        }
+
+        var account = new Object();
+        account.owner = "광수";
+        account.code = "123";
+        account.balance = 0; // 잔액
+        account.inquery = inquery;
+        account.deposit = deposit;
+        account.withdraw = withdraw;
+*/
+
+
+/****************** 객체 생성 방법2 - 리터럴 표기법*******************/
+        var account = {
+            owner: "광수",
+            code: "123",
+            balance: 0,
+
+            inquery: function() {return this.balance;},
+            deposit: function(money) {this.balance += money;},
+            withdraw: function(money){
+                if (money > this.balance) {
+                    print("통장잔금보다 인출액이 큽니다. 전체를 반환합니다.");
+                    this.balance = 0;
+                    return money
+                }
+                this.balance -= money;
+                return money
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+    <h1>은행 계좌 객체 만들기</h1>
+
+    <script>
+        document.write("account: ");
+        document.write(account.owner + ", ");
+        document.write(account.code + ", ");
+        document.write(account.balance + "<br>");
+
+        // 저금
+        account.deposit(10000);
+        document.write("잔액: " + account.inquery() + "<br/>");
+
+        account.withdraw(3000);
+        document.write("잔액: " + account.inquery() + "<br/>");
+
+    </script>
+
+
+
+</body>
+</html>

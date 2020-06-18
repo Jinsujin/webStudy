@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+<script>
+
+/**
+ * 값에 의한 호출 VS 참조에 의한 호출
+ * 
+ * 
+*/
+
+
+// 값에 의한 호출
+// a, x 는 다른 영역의 메모리에 위치한 별개의 변수
+function add1(x) { return x = x+ 1; }
+var a = 3;
+var b = add1(a);
+console.log(`a = ${a} , b = ${b}`); // a = 3, b = 4
+
+
+// 참조에 의한 전달
+// 함수가 호출될때, a 의 복사본이 인자 p 에 할당. 
+// 이때, 변수 a 에는 객체의 참조값이 저장되어 있고, 이 참조값을 인자 p 에 대입 => 똑같은 객체를 참조하게 됨
+function add2(p) { p.x += 1; p.y += 1; return p; }
+var a = {x:3, y:4};
+var b = add2(a);
+console.log(a, b); // a = {x: 4, y: 5}, b = {x: 4, y: 5}
+
+
+
+/**
+ * 인자수가 여러개일때는, 객체의 프로퍼티로 넘겨보자
+ * 인자수가 더 늘어나더라도, 객체의 프로퍼티만 수정해 주면 된다
+*/
+var ballParameters = {
+    x: 0,
+    y: 0,
+    vx: 10,
+    vy: 15,
+    radius: 5
+}
+
+function setBallProperties(params){
+    // 처리
+}
+setBallProperties(ballParameters);
+
+
+
+
+</script>
+
+</head>
+<body>
+    
+</body>
+</html>

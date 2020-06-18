@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 - 프로토타입</title>
+    <script>
+        /*
+        * prototype
+        * class 와 유사. 객체를 찍어내는 틀.
+        * Array, Date, String 등이 프로토타입에 해당.
+        *
+        * */
+
+        /*
+        * 객체 생성방법3. - 프로토타입으로 생성
+        * 프로토타입을 만들때 사용하는 함수를 생성자 함수(constructor)라고 한다.
+        * new 객체가 생성될 때 호출되는 함수.
+        *
+        * */
+        function Student(name, score){
+            this.univ = "부산대";
+            this.name = name;
+            this.score = score;
+            this.getGrade = function(){
+                if(this.score > 80) return 'A';
+                else if(this.score > 60) return 'B';
+                else return 'F';
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <h2>생성자 함수(constructor) 를 이용해 객체 생성하기</h2>
+    <script>
+        var quang = new Student("광수", 30);
+        document.write(quang.name + ": " + quang.getGrade() + "<br/>");
+
+        var kim = new Student("김고은", 90);
+        document.write(kim.name + ": " + kim.getGrade() + "<br/>");
+
+    </script>
+</body>
+</html>

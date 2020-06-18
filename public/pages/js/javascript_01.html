@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트 불러오기</title>
+
+<!--
+    방법1.
+    <script src="../lib/main.js"></script>
+    HTML parsing -> [js fetch -> js 실행] -> 다시 HTML parsing
+
+
+  방법3. async
+   HTML parsing -> [  js 실행동안 멈춤 ] -> parsing HTML
+   fetch js   >  js 실행
+   자바스크립트 파일 다운로드 받는 시간 절약
+   먼저 가져온 js 를 먼저 실행. 실행순서 보장되지 않음
+   <script async src="../lib/main.js"></script>
+
+ 방법4. defer
+    HTML parsing -> 페이지가 준비되었을때  js 실행
+    fetch js
+    파싱하는 동안 js 파일을 병렬로 가져오고,
+    페이지가 준비 되었을때 모든 js 파일을 순차적으로 실행
+
+-->
+    <script defer src="../lib/main.js"></script>
+
+</head>
+<body>
+
+
+<h1>자바스크립트 포함하는 방법</h1>
+
+<section>
+    <h2>head 안에 script src="../lib/main.js"</h2>
+    <p>
+        HTML parsing -> [js fetch -> js 실행] -> 다시 HTML parsing
+    </p>
+</section>
+
+<section>
+    <h2>body 끝나기 전에 추가</h2>
+    <p>
+        HTML parsing ->[페이지 준비됨]-> fetch js -> js 실행
+    </p>
+    <p>
+        javascript 파일에 의존적이라면, <br>
+        페이지가 로드됬어도, 자바스크립트 파일이 로드 될때까지 기다려야 한다.
+    </p>
+</section>
+
+<section>
+    <h2>head 안에 async 키워드로 포함</h2>
+     <p>
+         HTML parsing / fetch js -> [ js실행 / HTML parsing STOP ] -> parsing HTML
+     </p>
+    <p>
+        자바스크립트 파일 다운로드 받는 시간 절약<br>
+        먼저 가져온 js 를 먼저 실행. 실행순서 보장되지 않음
+    </p>
+</section>
+
+<section>
+    <h2>defer 키워드로 포함</h2>
+    <p>
+        HTML parsing/ fetch js -> 페이지가 준비되었을때  js 실행
+    </p>
+    <p>
+        파싱하는 동안 js 파일을 병렬로 가져오고,
+        페이지가 준비 되었을때 모든 js 파일을 순차적으로 실행
+    </p>
+</section>
+
+
+<!--
+    방법2. body 끝나기 전
+    HTML parsing -> js fetch -> js 실행
+    <script src="../lib/main.js"></script>
+    -->
+
+
+</body>
+</html>

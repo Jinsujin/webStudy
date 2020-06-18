@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+    <script>
+
+        'use strict';
+    /*
+    
+    [ 동기 ]
+        javascript 는 코드를 위에서 아래로 읽는다 (동기적 수행)
+        호이스팅이 된 이후부터 코드가 나타나는 순서대로.
+
+        호이스팅: var, function 선언문을 위로 끌어 올리는 것.
+    
+
+    [ 비동기 ] 
+        병렬 처리. 순서를 지키지 않고 처리할 수 있다.
+    */
+    
+
+    console.log('1');
+    setTimeout(() => {
+        console.log('2');
+    }, 1000);
+
+    console.log('3');
+    
+
+    // 동기적 콜백
+    function printImmediately(print){
+        print();
+    }
+    printImmediately(() => console.log('hello!'));
+
+
+    // 비동기적 콜백
+    function printWidthDelay(print, timeout) {
+        setTimeout(print, timeout);
+    }
+    printWidthDelay(() => console.log('async callback'), 2000);
+
+
+
+    /**
+     * 콜백지옥
+     * 1. loginUser 함수 호출 - id, password 넘겨줌 
+     *  => 로그인이 성공했을시, onSuccess(id) 콜백호출
+     * 2. 받아온 id 를 이용해, 사용자의 정보를 알아보는 getRoles 함수 호출
+     *  => 
+     * 
+     * 단점: 
+     * 가독성이 떨어짐
+     * 체인이 길기 때문에 어느부분에 에러가 발생했는지 찾기 어려움
+     * => Promise, async await 으로 해결
+     * 
+    */
+    class UserStorage {
+        loginUser(id, password, onSuccess, onError){
+            setTimeout(() => {
+                if(id === 'jin' && password === '1111'){
+                    onSuccess(id);
+                } else {
+                    onError(new Error('not found!'));
+                }
+            }, 2000);
+        }
+
+        getRoles(user, onSuccess, onError){
+            setTimeout(() => {
+                if(user === 'jin'){
+                    onSuccess({name: 'jinsu', role: 'admin'});
+                } else {
+                    onError(new Error('on access'));
+                }
+            }, 1000);
+        }
+    }
+
+
+
+    const userStorage = new UserStorage();
+    const id = prompt('enter your id');
+    const password = prompt('enter your password');
+    userStorage.loginUser(
+        id, 
+        password, 
+        (user) => {
+            userStorage.getRoles(
+                user, 
+                (userWithRole) => {
+                    alert(`you have a ${userWithRole.role}`);
+                }, 
+                error => { console.log(error); }
+                );
+        }, 
+        error => {console.log(error);}
+    );
+
+
+
+    </script>
+    
+</body>
+</html>

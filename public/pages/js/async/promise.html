@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <script>
+      /**
+       * Promise
+       *
+       * 비동기 수행을 간편하게 처리할수 있도록 도와주는 오브젝트.
+       * 비동기 처리 에서 콜백함수 대신 사용
+       *
+       * 정상적으로 기능이 성공되었다면, 성공의 메시지 -> 처리값 리턴
+       * 실패했다면, 에러 전달
+       *
+       * 상태: 수행중pending -> 성공적으로 오퍼레이션 끝냄 fulfilled / 네트워크에 문제가 생김 rejeacted
+       * 프로듀서: 정보제공
+       * 소비자 : 정보소비
+       *
+       */
+
+      /**
+       * 1. Producer 정보제공
+       * resolve : 기능을 정상적으로 수행해서 결과를 전달해주는 함수
+       * reject : 기능을 수행하다가 문제가 생기면 호출하게 될
+       *
+       * Promise 를 만들면, excutor 함수가 자동으로 실행이 됨
+       */
+      const promise = new Promise((resolve, reject) => {
+        // 비동기 처리 : 네트워크 처리, 파일읽기등 시간이 걸리는 작업
+        console.log("resolve running....");
+
+        setTimeout(() => {
+          // resolve('success'); // 성공적으로 처리 완료시, resolve 콜백함수를 전달
+
+          reject(new Error("no network"));
+        }, 2000);
+      });
+
+      /**
+       * 2.Consumers : then , catch, finally
+       * promise 가 정상적으로 수행이 되고난 후, resolve 콜백함수로 전달한 값을 가져올 수 있다
+      */
+      promise
+        .then(value => {
+          // promise 수행이 성공했을때
+          // 값 or promise전달 가능
+          console.log(value);
+        })
+        .catch(error => {
+          // promise 에서 실패했을때, 에러메시지 출력
+          console.log(error);
+        })
+        .finally(() => {
+          // 성공, 실패 모두 들어옴
+          console.log("finally");
+        });
+
+      /**
+       * Promise Chaining
+       *
+       */
+
+      const fetchNumber = new Promise((resolve, reject) => {
+        // 서버통신을 했다고 가정하고, 1초 뒤에 숫자 전달
+        setTimeout(() => resolve(1), 1000);
+      });
+
+      fetchNumber
+        .then(num => num * 2) // 1* 2 = 2
+        .then(num => num + 5) // 2 + 5 = 7
+        .then(num => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => resolve(num - 1), 1000); // 7 - 1 = 6
+          });
+        })
+        .then(num => console.log(num));
+
+      /**
+       * Error Handling
+       *
+       * 각각 서버에서 가져와서 처리한다고 가정.
+       */
+
+      const getChicken = () =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => resolve("🐔"), 1000);
+        });
+
+      const getMeat = chicken =>
+        new Promise((resolve, reject) => {
+        //   setTimeout(() => resolve(`${chicken} => 🍖`), 1000);
+          setTimeout(() => reject(`${chicken} => 🍖`), 1000);
+        });
+
+      const cook = meat =>
+        new Promise((resolve, reject) => {
+          setTimeout(() => resolve(`${meat} => 🥘`), 1000);
+        });
+
+      // getChicken()
+      // .then(chicken => getMeat(chicken))
+      // .then(meat => cook(meat))
+      // .then(cook => console.log(cook));
+
+      // 결과값을 가져와서, 다른함수를 바로 호출하는 경우에는 인자값 생략 가능
+      getChicken() //
+        .then(getMeat) 
+        .catch(error => { // 중간에 에러가 생긴다면, 처리할 작업
+            return '👨‍🍳';
+        })
+        .then(cook)
+        .then(console.log)
+        .catch(console.log);
+    </script>
+  </head>
+  <body></body>
+</html>

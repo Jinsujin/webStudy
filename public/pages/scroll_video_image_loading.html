@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <style>
+
+body {
+
+    height: 500vh;
+
+}
+
+.sample-img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+#comment {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.loading-container{
+    width: 70vw;
+    height: 60px;
+    position: relative;
+}
+
+.loading-container > div {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+} 
+
+.loading-container .back {
+    border: 1px solid red;
+    
+}
+.loading-container .bar {
+    background: green;
+    width: 0;
+    /* transition: all 1s; */
+}
+
+.loading-container .count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+    </style>
+</head>
+<body>
+
+
+
+
+    <img class="sample-img" src="../images/aurora_frames/1.jpg">
+
+
+    <section id="comment">
+            <h1>비디오를 이미지로 변환해(초당 60 프레임), 스크롤 값에 따라 재생하기</h1>
+            <p>
+                이미지 시퀀스를 이용한 방식<br>
+                검색: 동영상 프레임 추출
+            </p>
+            <div class="loading-container">
+                <div class="back"></div>
+                <div class="bar"></div>
+                <div class="count">0%</div>
+            </div>
+    </section>
+
+    <script>
+    
+        const imgElem = document.querySelector('.sample-img');
+
+        const loadingbar = document.querySelector('.loading-container .bar');
+        const countElem = document.querySelector('.loading-container .count');
+
+        let loadedImageCount = 0;
+
+        //  총 이미지 갯수. 
+        let totalImagesCount = 72;
+        const videoImages = [];
+
+        /**
+         * 이미지를 한장씩 로드
+         * 이미지들이 얼마나 로드되었나 비율값을 여기서 알아낼 수 있다.
+        */
+        function loadImages(){
+            for(let i = 0; i < totalImagesCount; i++){
+                let imgElem = new Image();
+                imgElem.src = `../images/aurora_frames/${1 + i}.jpg`;
+                videoImages.push(imgElem);
+
+                imgElem.addEventListener('load', function(){
+                    loadedImageCount++;
+
+                    const percent = loadedImageCount / totalImagesCount * 100;
+                    loadingbar.style.width = `${percent}%`;
+                    countElem.innerHTML = `${Math.round(percent)}%`;
+                    if (loadedImageCount === totalImagesCount) {
+                        console.log('모든 이미지 로드 완료!');
+                        init();
+                    }
+                });
+            }
+        }
+
+        
+
+
+        let progress;
+        let currentFrame;
+
+        function init(){
+            document.body.classList.remove('before-load');
+
+            window.addEventListener('scroll', function(){
+                progress = pageYOffset / (document.body.offsetHeight - innerHeight);
+                if(progress < 0) progress = 0;
+                if(progress > 1) progress = 1;
+
+                requestAnimationFrame(function(){
+                    // 전체 960장 => 0~959
+                    currentFrame = Math.round((totalImagesCount - 1) * progress);
+                    console.log("currentFrame", currentFrame);
+                    imgElem.src = videoImages[currentFrame].src;
+                });
+            });
+        }
+
+        // 모든 리소스가 로드된후, 초기화 함수 호출
+        window.addEventListener('load', ()=>{
+
+            setTimeout(() => {
+                loadImages();
+
+                init();
+            }, 1000);
+
+        });
+
+
+    </script>
+    
+</body>
+</html>
+ No newline at end of file

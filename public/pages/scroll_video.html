@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <style>
+
+body {
+
+    height: 500vh;
+
+}
+
+.sample-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+#comment {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+    </style>
+</head>
+<body>
+
+
+
+    <div class="container">
+        <video class="sample-video" src="../source/aurora00.mov" muted></video>
+    </div>
+
+
+    <section id="comment">
+            <h1>비디오를 스크롤 값에 따라 재생하기</h1>
+            <p>
+                비디오를 직접 처리하면, 비디오 해상도 높은경우 버벅 거린다
+            </p>
+    </section>
+
+    <script>
+    
+        const videoElem = document.querySelector('.sample-video');
+
+        // loadeddata event : 비디오 이벤트가 실행 준비된 상태인가 - 비디오는 로드가 된 다음에 조작 가능하니까! 
+        videoElem.addEventListener('loadeddata', function(){
+            console.log("loadeddata - 비디오 로드 완료");
+
+            init();
+        });
+
+
+let progressRatio;
+let currentFrame;
+
+function init(){
+
+    window.addEventListener('scroll', function(){
+
+        // 현재 얼만큼 스크롤 됬는지, 비율값 : 0~ 1 사이
+        progressRatio = pageYOffset / (document.body.offsetHeight - window.innerHeight);
+        console.log(progressRatio);
+
+        if(progressRatio < 0) progressRatio = 0;
+        if(progressRatio > 1) progressRatio = 1;
+
+        requestAnimationFrame(function(){
+            // 현재 재생 시간을 스크롤 비율 값에 따라 설정
+            console.log("currentTime = " , videoElem.duration * progressRatio);
+            videoElem.currentTime = videoElem.duration * progressRatio;
+        });
+
+    });
+
+}
+
+
+    </script>
+    
+</body>
+</html>
+

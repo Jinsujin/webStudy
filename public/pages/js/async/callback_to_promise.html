@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <script>
+      // 콜백을 전달받지 않고, promise 로 처리
+      class UserStorage {
+        loginUser(id, password) {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              if (id === "jin" && password === "1111") {
+                // 성공했을때
+                resolve(id);
+              } else {
+                // 실패했을때
+                reject(new Error("not found!"));
+              }
+            }, 2000);
+          });
+        }
+
+        getRoles(user) {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              if (user === "jin") {
+                resolve({ name: "jinsu", role: "admin" });
+              } else {
+                reject(new Error("no access"));
+              }
+            }, 1000);
+          });
+        }
+      }
+
+      const userStorage = new UserStorage();
+      const id = prompt("enter your id");
+      const password = prompt("enter your password");
+
+      userStorage
+        .loginUser(id, password)
+        .then(userStorage.getRoles)
+        .then(user => alert(`Hi ${user.name}, you have a ${user.role}`))
+        .catch(console.log);
+    </script>
+  </head>
+  <body></body>
+</html>

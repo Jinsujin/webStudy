@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        
+            
+    var users = [
+{ id: 1, name: 'ID', age: 12},
+{ id: 2, name: 'FH', age: 64},
+{ id: 3, name: 'TG', age: 98},
+{ id: 4, name: 'WS', age: 36},
+{ id: 5, name: 'JE', age: 27},
+{ id: 6, name: 'JU', age: 11},
+{ id: 7, name: 'IE', age: 43},
+{ id: 8, name: 'OD', age: 29}
+
+    ];
+
+/**
+ * 커링
+ * 함수와 인자를 다루는 기법
+ * 함수에 인자를 하나씩 적용해나가다가, 필요한 인자가 채워지면 함수 본채를 실핼
+ * 
+*/
+
+/**
+ * _curry(fn)
+ * 인자로 fn 함수(본체동작)를 받고, 커리함수를 실행하는 즉시 함수를 리턴
+ * 
+ * 미리 받아두었던 함수 본체인 fn 을 내부에서 평가
+*/
+function _curry(fn){
+    return function(a){
+        return function(b){
+            return fn(a,b);
+        }
+    }
+}
+
+/**
+ * 인자가 2개 들어왔다면, 한번에 즉시 평가
+ * 인자가 하나가 들어왔다면, 안쪽에 평가를 해서 함수 실행을 미룸
+ * 
+*/
+function _curry2(fn){
+    return function(a, b){
+        return (arguments.length == 2) ? fn(a, b) : function(b){ return fn(a,b); };
+    }
+}
+
+
+/**
+ * 인자를 오른쪽에서 부터 적용해 나가는 curryr 함수를 생성
+ * 
+*/
+
+function _curryr(fn){
+    return function(a,b){
+        return arguments.length == 2 ? fn(a,b) : function(b){ return fn(b, a); };
+    }
+
+}
+
+
+
+/*
+var add = function(a, b){
+    return a + b;
+}
+console.log( add(10, 5) );
+*/
+
+var add = _curry(function(a,b){
+    return a + b;
+});
+
+/*
+여기사 _curry 의 결과
+
+    return function(a){ // 1. 인자 a 를 먼저 받는다
+        return function(b){ // 2. 인자 b 를 받는다
+            return fn(a,b); // 3. 처음에 받았던 함수를 실행한다
+        }
+    }
+
+*/
+
+
+var add10 = add(10);
+console.log( add10(5) );
+
+console.log(add(3)(5));
+
+
+var add2_ = _curry2(function(a,b){ return a + b; })
+console.log( add2_(1,2) );
+
+
+
+var sub = _curryr(function(a,b){
+    return a - b;
+});
+
+console.log( sub(10, 5) );
+
+var sub10 = sub(10);
+console.log( sub10(5) );
+
+
+/**
+ * object 가 키로 접근이 되지 않을때, Error가 아닌, undefined 출력
+ * 
+*/
+// function _get(obj, key){
+//     return obj == null ? undefined : obj[key];
+// }
+
+/**
+ * curryr 을 적용하면, 평가순서를 뒤집을 수 있게된다.
+ * 인자를 오른쪽을 먼저 적용할 수 있게 된다.
+ * 
+*/
+var _get = _curryr(function(obj, key){
+    return obj == null ? undefined : obj[key];
+});
+
+var user1 = users[0];
+console.log(user1.name);
+console.log(_get(user1, 'name'));
+
+// console.log(users[10].name); // Uncaught TypeError
+console.log(_get(users[10], 'name')); //undefined 출력
+
+console.clear();
+
+console.log(_get('name')(user1));
+
+// 이름을 꺼낼수 있는 함수가 된다
+var get_name = _get('name');
+console.log(get_name(user1));
+
+console.log(get_name(users[4]));
+
+</script>
+</body>
+</html>
