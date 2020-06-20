@@ -1,7 +1,14 @@
 'use strick';
 
 const money =  prompt("숫자를 입력해주세요");//'1000000';
-const money_arr = money.split("");
+
+/**
+ * String -> Array
+ * 1. split("")
+ * 2. ... spread(펼침) 연산자
+ */
+// const money_arr = money.split("");
+const money_arr = [...money];
 
 money_arr.reverse();
 
