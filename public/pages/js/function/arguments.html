@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Function</title>
+  </head>
+
+  <h1>함수</h1>
+  <section>
+    <h2>함수의 인수</h2>
+    <ul>
+      <li>인수를 생략하면 undefined 가 된다</li>
+      <li>
+        모든 함수에서는 arguments 지역변수(객체)를 통해 인수에 접근이 가능하다
+      </li>
+      <li>
+        인수 개수가 일정하지 않은 경우, arguments 를 활용할 수 있다. (이때,
+        arguments 는 유사배열 객체이다)
+      </li>
+    </ul>
+  </section>
+  <body>
+    <script>
+      /*
+      함수의 인수
+
+      */
+
+      function example1(x, y) {
+        console.log(`x = ${x} y = ${y}`);
+      }
+      example1(8); // x = 8 y = undefined
+
+      function example2(x, y) {
+        arguments[1] = 10;
+        console.log(`x = ${x}, y = ${y}`);
+      }
+      example2(1, 2);
+
+      /*
+        arguments: 
+        Arguments(3) ["/", "apple", "banana", callee: ƒ, Symbol(Symbol.iterator): ƒ]
+        callee: 현재 실행되고 있는 함수의 참조. 여기서는 ƒ example3(seperator)
+      */
+      function example3(seperator) {
+        var result_string = "";
+        console.log(arguments);
+        for (var i = 1; i < arguments.length; i++) {
+          result_string += arguments[i];
+          console.log(`i = ${i}, ${arguments[i]}`);
+          if (i < arguments.length - 1) result_string += seperator;
+        }
+        return result_string;
+      }
+      console.log(example3(",", "강아지", "고양이"));
+    </script>
+  </body>
+</html>

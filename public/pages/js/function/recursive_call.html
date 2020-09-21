@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>함수</h1>
+    <section>
+      <h2>재귀함수</h2>
+      <ul>
+        <li>자기자신을 호출하는 함수</li>
+        <li>익명함수의 재귀호출은 arguments.callee 를 사용</li>
+        <li>반드시 멈추는 조건이 있어야 한다</li>
+        <li>
+          호출된 횟수만큼 메모리 소비량이 늘어난다(이를 해결하기 위해, 언어에서
+          Tail Call Optimization 기능으로, 반복이 많이 일어나도 스택이 넘치지
+          않게 함 )
+        </li>
+        <li>
+          for나 while 보다 재귀함수가 문제를 더 간단하게 해결할 수 있을때만
+          사용하는것이 좋다
+        </li>
+      </ul>
+    </section>
+
+    <script>
+      function fact(n) {
+        if (n <= 1) return 1;
+        return n * fact(n - 1);
+      }
+      //   console.log(fact(5));
+
+      var fact2 = function(n) {
+        if (n <= 1) return 1;
+        return n * arguments.callee(n - 1);
+      };
+      console.log(fact2(3));
+
+      let numArray = [2, [4, 5], [5, [1, 8], 3]];
+      function fact3(acc, array) {
+        if (array.length === 0) {
+          return acc;
+        } else {
+          if (typeof array[0] === "number") {
+            console.log(`call (${acc}) [${array}]`);
+          }
+          return fact3(
+            acc +
+              (typeof array[0] === "number" ? array[0] : fact3(0, array[0])),
+            array.slice(1)
+          );
+        }
+      }
+      console.log(`총합: ${fact3(0, numArray)}`);
+
+      function hanoi(num, from, to, other) {
+        if (num < 1) return;
+        console.log(`${num}, ${from} -> ${to} , ${other}`);
+        hanoi(num - 1, from, other, to);
+        console.log(`${num} 번째를 ${from} -> ${other}`);
+        hanoi(num - 1, to, from, other);
+      }
+      hanoi(3, "A", "B", "C");
+    </script>
+  </body>
+</html>
